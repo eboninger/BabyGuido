@@ -22,7 +22,9 @@ public class hand_positions : MonoBehaviour {
     Coordinate tree_coord = new Coordinate(-5.428f, -2.46f);
     Coordinate lightning_coord = new Coordinate(5.2f, 0.71f);
     Coordinate wind_coord = new Coordinate(-1.38f, 0.61f);
-    string current = "PalmtreeH";
+    string currentH;
+    string current;
+    int currentI;
 
     
 
@@ -31,21 +33,58 @@ public class hand_positions : MonoBehaviour {
         possible_positions.Add("Palmtree", tree_coord);
         possible_positions.Add("Lightning", lightning_coord);
         possible_positions.Add("Wind", wind_coord);
+        current = "Palmtree";
+        currentH = "PalmtreeH";
+        currentI = 0;
 
-        Transform hand = GameObject.Find("Hand").transform;
-        var highlighted = GameObject.Find("PalmtreeH");
-
-        Vector3 starting_pos = new Vector3(possible_positions["Palmtree"].x, possible_positions["Palmtree"].y);
-        hand.position = starting_pos;
-        //highlighted.renderer.
-
+        movehand();
+        highlight();
 	}
+
+    void movehand()
+    {
+        Transform hand = GameObject.Find("Hand").transform;
+        Vector3 new_pos = new Vector3(possible_positions[current].x, possible_positions[current].y);
+        hand.position = new_pos;
+    }
+
+    void highlight()
+    {
+        var highlighted = GameObject.Find(currentH);
+        var layer = highlighted.GetComponent<SpriteRenderer>();
+        layer.sortingLayerName = "Foreground";
+    }
+
+    void unhighlight()
+    {
+        var highlighted = GameObject.Find(currentH);
+        var layer = highlighted.GetComponent<SpriteRenderer>();
+        layer.sortingLayerName = "Default";
+    }
+
+    void updateHandAndMouse(int offset)
+    {
+        unhighlight();
+        var highlightable = GameObject.Find("Unhighlighted").transform;
+        currentI = (currentI + offset + highlightable.childCount) % highlightable.childCount;
+        var nextTransform = highlightable.GetChild(currentI);
+        current = nextTransform.name;
+        currentH = current + "H";
+        currentI += offset;
+        highlight();
+        movehand();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	    if (Input.GetKeyDown("right"))
         {
-
+            updateHandAndMouse(1);
+            
+        }
+        if (Input.GetKeyDown("left"))
+        {
+            updateHandAndMouse(-1);
         }
 	}
 }
