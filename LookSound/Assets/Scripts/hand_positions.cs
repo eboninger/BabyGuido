@@ -22,6 +22,7 @@ public class hand_positions : MonoBehaviour {
     Coordinate tree_coord = new Coordinate(-5.428f, -2.46f);
     Coordinate lightning_coord = new Coordinate(5.2f, 0.71f);
     Coordinate wind_coord = new Coordinate(-1.38f, 0.61f);
+    Coordinate wave_coord = new Coordinate(6.04f, -3.34f);
     string currentH;
     string current;
     int currentI;
@@ -33,6 +34,7 @@ public class hand_positions : MonoBehaviour {
         possible_positions.Add("Palmtree", tree_coord);
         possible_positions.Add("Lightning", lightning_coord);
         possible_positions.Add("Wind", wind_coord);
+        possible_positions.Add("Wave", wave_coord);
         current = "Palmtree";
         currentH = "PalmtreeH";
         currentI = 0;
@@ -70,7 +72,6 @@ public class hand_positions : MonoBehaviour {
         var nextTransform = highlightable.GetChild(currentI);
         current = nextTransform.name;
         currentH = current + "H";
-        currentI += offset;
         highlight();
         movehand();
     }
@@ -78,13 +79,8 @@ public class hand_positions : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    if (Input.GetKeyDown("right"))
-        {
-            updateHandAndMouse(1);
-            
-        }
+            updateHandAndMouse(1);           
         if (Input.GetKeyDown("left"))
-        {
             updateHandAndMouse(-1);
-        }
 	}
 }
