@@ -23,6 +23,7 @@ public class hand_positions : MonoBehaviour {
     Coordinate lightning_coord = new Coordinate(5.2f, 0.71f);
     Coordinate wind_coord = new Coordinate(-1.38f, 0.61f);
     Coordinate wave_coord = new Coordinate(6.04f, -3.34f);
+    Coordinate bird_coord = new Coordinate(-0.4f, -4.59f);
     string currentH;
     string current;
     int currentI;
@@ -35,6 +36,7 @@ public class hand_positions : MonoBehaviour {
         possible_positions.Add("Lightning", lightning_coord);
         possible_positions.Add("Wind", wind_coord);
         possible_positions.Add("Wave", wave_coord);
+        possible_positions.Add("Bird", bird_coord);
         current = "Palmtree";
         currentH = "PalmtreeH";
         currentI = 0;
