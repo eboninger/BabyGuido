@@ -17,5 +17,6 @@ public class generateChild : MonoBehaviour {
 		//create a new child
 		GameObject newChild = Instantiate(childTemplate);
 		newChild.transform.SetParent(transform);
+		newChild.transform.position = transform.position;
 	}
 }
