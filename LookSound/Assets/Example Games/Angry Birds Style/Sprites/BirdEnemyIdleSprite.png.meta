@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: 31a12d1af1d3d6d4aaa980cbd7ae239a
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: EnemyIdleSprite_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

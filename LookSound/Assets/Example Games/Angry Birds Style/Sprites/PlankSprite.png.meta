@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: 55b4e410255aa024fb59a870f219dd34
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: PlankSprite_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

@@ -1,7 +1,9 @@
 fileFormatVersion: 2
 guid: 555975464417842748951a085f3cf3ba
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: CatapultSprite_0
+    21300002: CatapultSprite_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

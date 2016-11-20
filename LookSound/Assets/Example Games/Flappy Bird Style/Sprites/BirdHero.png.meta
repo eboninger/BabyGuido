@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: b9679ce5047dd48bbbf37321679fa793
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: BirdHero_0
+    21300002: BirdHero_1
+    21300004: BirdHero_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
