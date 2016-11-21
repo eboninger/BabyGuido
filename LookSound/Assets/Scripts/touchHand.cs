@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class touchHand : MonoBehaviour {
 	//Public Variables
 	public GameObject hand;
-	public GameObject[] draggables;
+	//public GameObject[] draggables;
 
 	//Private Variables
 	private Vector3 handPos;
@@ -54,11 +54,7 @@ public class touchHand : MonoBehaviour {
 			touched = false;
 		}
 	}
-
-
-	void moveChild(Transform element, Vector3 handPos){
-			element.transform.position = handPos;
-	}
+		
 
 	//move the mouse to where the player touches
 	void touchDrag() {
@@ -96,7 +92,7 @@ public class touchHand : MonoBehaviour {
 			dragAndUpdate(hit);
 
 			if(draggingChild){
-				//print("dragging child");
+				print("dragging child");
 				child.position = screenPos;
 				//print("child transform: " + screenPos.x + " " + screenPos.y);
 			}
@@ -116,25 +112,24 @@ public class touchHand : MonoBehaviour {
 
 				parent = hit.transform;
 				draggingChild = true;
-				if(parent.childCount > 0){
-					print("new child assigned");
+				/*if(parent.childCount > 0){
+					
 					child = parent.GetChild(0).transform;
-				}
+					print("new child " + child.name);
+				}*/
 				//replace the drag bird we are now moving with the mouse
 				if(!madeChild){
 					generateChild genC = parent.GetComponent<generateChild>();
 					if(genC != null){
 						print("made new child for parent " + parent.name);
 						genC.makeNewChild(0);
+						child = parent.GetChild(0).transform;
 					}
 					madeChild = true;
 				}
 				genUI.objectGrabbed(true);
 
 			} 
-			if(hit.transform.tag == "Staff"){
-				print("Staff");
-			}
 		}
 	}
 
@@ -143,7 +138,7 @@ public class touchHand : MonoBehaviour {
 		madeChild = false;
 		if(genUI.grabbed){
 			//we grabbed the item and are now releasing it
-			genUI.readToDrop(child.tag);
+			genUI.readyToDrop(child.tag);
 		}
 		genUI.objectGrabbed(false);
 

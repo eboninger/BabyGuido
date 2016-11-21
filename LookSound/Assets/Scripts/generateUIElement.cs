@@ -9,10 +9,10 @@ public class generateUIElement : MonoBehaviour{
 	public bool grabbed = false;
 	public bool inTheZone = false;
 
-
 	//player grabbed an object, dragged it to the staff and then released
-	public void readToDrop(string name){
+	public void readyToDrop(string name){
 		if(inTheZone){
+			//staff.GetComponent<Image>().color = Color.cyan;
 			print("Dropped " + name);
 			if(staff){
 				generateChild gc = staff.GetComponent<generateChild>();
@@ -20,7 +20,8 @@ public class generateUIElement : MonoBehaviour{
 					//if there are less than ten children
 					if(staff.transform.childCount < 10){
 						//make a new child at the end/back/right
-						gc.makeNewChild(1);
+						//staff.GetComponent<Image>().color = Color.cyan;
+						gc.makeNewChild(1, name);
 					}
 				}
 			}
@@ -30,8 +31,19 @@ public class generateUIElement : MonoBehaviour{
 	//called by Staff "on pointer enter" and "on pointer exit"
 	//the former returns true, the latter false
 	public void inDropZone(bool x){
-		//print("mouse over staff: " + x);
+		#if UNITY_EDITOR
 		inTheZone = x;
+		#else
+		//need to see if user actually dropped the object in the zone
+		//or moved finger out of the zone
+		if(Input.touchCount >= 1){
+			if(Input.GetTouch(0).phase != TouchPhase.Ended){
+				inTheZone = x;
+			}
+			
+		} 
+		#endif
+
 	}
 
 	//called by touch hand when a stationary object is clicked/touched
@@ -39,5 +51,6 @@ public class generateUIElement : MonoBehaviour{
 		//print("object grabbed: " + x);
 		grabbed = x;
 	}
+
 
 }
