@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Coordinate : MonoBehaviour
+public class Coordinate
 {
     public float x;
     public float y;
@@ -17,63 +17,89 @@ public class Coordinate : MonoBehaviour
 
 public class hand_positions : MonoBehaviour {
 
-    Dictionary<string, Coordinate> possible_positions = new Dictionary<string, Coordinate>();
-
-    Coordinate tree_coord = new Coordinate(-5.428f, -2.46f);
-    Coordinate lightning_coord = new Coordinate(5.2f, 0.71f);
-    Coordinate wind_coord = new Coordinate(-1.38f, 0.61f);
-    Coordinate wave_coord = new Coordinate(6.04f, -3.34f);
-    Coordinate bird_coord = new Coordinate(-0.4f, -4.59f);
-    string currentH;
-    string current;
-    int currentI;
+    public int MAX_OBJECTS = 30; // total possible objects
+    public Coordinate[] possible_positions;
+    public GameObject[] soundObjects;  // array of all sound objects
+    public int totalSoundObjects;  // number of sound objects in soundObjects array
+    public play_functionality pf;
+    public int currentI;     // index in array of current highlighted member
+    public Transform hand;
 
     
 
 	// Use this for initialization
 	void Start () {
-        possible_positions.Add("Palmtree", tree_coord);
-        possible_positions.Add("Lightning", lightning_coord);
-        possible_positions.Add("Wind", wind_coord);
-        possible_positions.Add("Wave", wave_coord);
-        possible_positions.Add("Bird", bird_coord);
-        current = "Palmtree";
-        currentH = "PalmtreeH";
-        currentI = 0;
+        totalSoundObjects = 0;
+        soundObjects = new GameObject[MAX_OBJECTS];
+        possible_positions = new Coordinate[MAX_OBJECTS];
 
+        int i = 0;
+
+        // add all sound objects on screen to the array
+        foreach (Transform child in transform)
+        {
+            soundObjects[i] = child.gameObject;          
+            add_possible_position(child.gameObject);
+            i++;
+        }
+
+        currentI = 0;
+        pf = GameObject.Find("Panel").GetComponent<play_functionality>();
+
+        //add_possible_positions();
         movehand();
         highlight();
 	}
 
+    public void add_possible_position(GameObject go)
+    {
+        var collider = go.GetComponent<BoxCollider2D>();
+        var oi = go.GetComponent<object_info>();
+        var x_pos = (go.transform.position.x * oi.sizeRatioX) - collider.offset.x + (collider.size.x / 2.0f);
+        var y_pos = (go.transform.position.y * oi.sizeRatioY) + collider.offset.y - (collider.size.y / 2.0f);
+
+        possible_positions[totalSoundObjects] = new Coordinate(x_pos, y_pos);
+        totalSoundObjects++;
+        print(totalSoundObjects);
+    }
+
+
+    // move the hand to the position of 'current'
     void movehand()
     {
-        Transform hand = GameObject.Find("Hand").transform;
-        Vector3 new_pos = new Vector3(possible_positions[current].x, possible_positions[current].y);
+        var new_pos = new Vector3(possible_positions[currentI].x, possible_positions[currentI].y);
         hand.position = new_pos;
     }
 
+    // highlight the object at index 'currentI'
     void highlight()
     {
-        var highlighted = GameObject.Find(currentH);
-        var layer = highlighted.GetComponent<SpriteRenderer>();
-        layer.sortingLayerName = "Foreground";
+        if (currentI < 5)
+        {
+            var pre_inf = soundObjects[currentI].GetComponent<object_info>();
+            pre_inf.highlighted.GetComponent<SpriteRenderer>().sortingLayerName = "Foreground";
+        }
+        
     }
 
+    // unhighlight the object at index 'currentI'
     void unhighlight()
     {
-        var highlighted = GameObject.Find(currentH);
-        var layer = highlighted.GetComponent<SpriteRenderer>();
-        layer.sortingLayerName = "Default";
+        if (currentI < 5)
+        {
+            var pre_inf = soundObjects[currentI].GetComponent<object_info>();
+            pre_inf.highlighted.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+        }
+        
     }
 
+    // update hand and mouse after adding offset to currentI to find next array position
     void updateHandAndMouse(int offset)
     {
         unhighlight();
-        var highlightable = GameObject.Find("Unhighlighted").transform;
-        currentI = (currentI + offset + highlightable.childCount) % highlightable.childCount;
-        var nextTransform = highlightable.GetChild(currentI);
-        current = nextTransform.name;
-        currentH = current + "H";
+        currentI = (currentI + offset + totalSoundObjects) % totalSoundObjects;
+        print("CURRENTI = " + currentI + " and TOTALSOUNDOBJECTS = " + totalSoundObjects);
+        var nextTransform = soundObjects[currentI].transform;
         highlight();
         movehand();
     }
@@ -84,5 +110,7 @@ public class hand_positions : MonoBehaviour {
             updateHandAndMouse(1);           
         if (Input.GetKeyDown("left"))
             updateHandAndMouse(-1);
+        if (Input.GetKeyDown("space"))
+            pf.addToPlayPanel();
 	}
 }
