@@ -17,13 +17,14 @@ public class Coordinate
 
 public class hand_positions : MonoBehaviour {
 
-    public int MAX_OBJECTS = 30; // total possible objects
+    public int MAX_OBJECTS = 5; // total possible objects
     public Coordinate[] possible_positions;
     public GameObject[] soundObjects;  // array of all sound objects
     public int totalSoundObjects;  // number of sound objects in soundObjects array
     public play_functionality pf;
     public int currentI;     // index in array of current highlighted member
     public Transform hand;
+    public bool inPlay;
 
     
 
@@ -32,6 +33,7 @@ public class hand_positions : MonoBehaviour {
         totalSoundObjects = 0;
         soundObjects = new GameObject[MAX_OBJECTS];
         possible_positions = new Coordinate[MAX_OBJECTS];
+        inPlay = false;
 
         int i = 0;
 
@@ -55,12 +57,11 @@ public class hand_positions : MonoBehaviour {
     {
         var collider = go.GetComponent<BoxCollider2D>();
         var oi = go.GetComponent<object_info>();
+
         var x_pos = (go.transform.position.x * oi.sizeRatioX) - collider.offset.x + (collider.size.x / 2.0f);
         var y_pos = (go.transform.position.y * oi.sizeRatioY) + collider.offset.y - (collider.size.y / 2.0f);
-
         possible_positions[totalSoundObjects] = new Coordinate(x_pos, y_pos);
         totalSoundObjects++;
-        print(totalSoundObjects);
     }
 
 
@@ -99,18 +100,39 @@ public class hand_positions : MonoBehaviour {
         unhighlight();
         currentI = (currentI + offset + totalSoundObjects) % totalSoundObjects;
         print("CURRENTI = " + currentI + " and TOTALSOUNDOBJECTS = " + totalSoundObjects);
-        var nextTransform = soundObjects[currentI].transform;
         highlight();
         movehand();
     }
 	
 	// Update is called once per frame
 	void Update () {
-	    if (Input.GetKeyDown("right"))
-            updateHandAndMouse(1);           
+        if (Input.GetKeyDown("right"))
+        {
+            if (inPlay)
+                pf.moveRight();
+            else
+                updateHandAndMouse(1);
+        }
         if (Input.GetKeyDown("left"))
-            updateHandAndMouse(-1);
+        {
+            if (inPlay)
+                pf.moveLeft();
+            else
+                updateHandAndMouse(-1);
+        }
         if (Input.GetKeyDown("space"))
+        {
             pf.addToPlayPanel();
+        }
+        if (Input.GetKeyDown("down") || Input.GetKeyDown("up"))
+        {
+            inPlay = !inPlay;
+            if (inPlay)
+                pf.highlight();
+            else
+                pf.unhighlight();
+        }
 	}
+
+
 }
