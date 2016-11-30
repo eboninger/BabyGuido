@@ -128,9 +128,15 @@ public class hand_positions : MonoBehaviour {
         {
             inPlay = !inPlay;
             if (inPlay)
+            {
+                hand.gameObject.SetActive(false);
                 pf.highlight();
+            }
             else
+            {
                 pf.unhighlight();
+                hand.gameObject.SetActive(true);
+            }
         }
 	}
 

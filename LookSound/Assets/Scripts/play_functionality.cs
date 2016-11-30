@@ -4,7 +4,7 @@ using System.Collections;
 public class play_functionality : MonoBehaviour {
     hand_positions hp;
     public GameObject[] playObjects;
-    public int MAX_PLAY_OBJECTS = 10;
+    public const int MAX_PLAY_OBJECTS = 20;
     public int total_play_objects;
     public int play_index;
     public GameObject currentHighlighted;
@@ -33,19 +33,29 @@ public class play_functionality : MonoBehaviour {
         newChild.transform.SetParent(transform);
         newChild.transform.position = transform.position;
 
-        playObjects[total_play_objects] = newChild;
-        total_play_objects++;
-        print("TOTAL PLAY OBECTS: " + total_play_objects);    
+        GameObject newHChild = Instantiate(pi.highlightedChildTemplate);
+        newHChild.transform.SetParent(transform);
+        newHChild.transform.position = transform.position;
+        newHChild.SetActive(false);
+
+        playObjects[total_play_objects * 2] = newChild;
+        playObjects[(total_play_objects * 2)     + 1] = newHChild;
+
+        total_play_objects++;  
     }
 
     public void moveLeft()
     {
-
+        unhighlight();
+        play_index = ((play_index - 1) + total_play_objects) % total_play_objects;
+        highlight();
     }
 
     public void moveRight()
     {
-
+        unhighlight();
+        play_index = (play_index + 1) % total_play_objects;
+        highlight();
     }
 
     public void highlight()
@@ -53,17 +63,8 @@ public class play_functionality : MonoBehaviour {
         if (total_play_objects < 1)
             return;
 
-        var pwh = playObjects[play_index].GetComponent<prefab_with_highlight>();
-        var desired_index = playObjects[play_index].transform.GetSiblingIndex(); 
-
-        GameObject newHighlighted = Instantiate(pwh.highlighted);
-        newHighlighted.transform.SetParent(transform);
-        newHighlighted.transform.position = transform.position;
-        newHighlighted.transform.SetSiblingIndex(desired_index);
-        Destroy(playObjects[play_index]);
-        playObjects[play_index] = newHighlighted;
-
-        // currentHighlighted = newHighlighted;
+        playObjects[play_index * 2].SetActive(false);
+        playObjects[(play_index * 2) + 1].SetActive(true);
     }
 
     public void unhighlight()
@@ -71,14 +72,7 @@ public class play_functionality : MonoBehaviour {
         if (total_play_objects < 1)
             return;
 
-        var pwo = playObjects[play_index].GetComponent<prefab_wo_highlight>();
-        var desired_index = playObjects[play_index].transform.GetSiblingIndex();
-
-        GameObject newUnhighlighted = Instantiate(pwo.unhighlighted);
-        newUnhighlighted.transform.SetParent(transform);
-        newUnhighlighted.transform.position = transform.position;
-        newUnhighlighted.transform.SetSiblingIndex(desired_index);
-        Destroy(playObjects[play_index]);
-        playObjects[play_index] = newUnhighlighted;
+        playObjects[(play_index * 2) + 1].SetActive(false);
+        playObjects[(play_index * 2)].SetActive(true);
     }
 }
