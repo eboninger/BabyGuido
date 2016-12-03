@@ -122,23 +122,40 @@ public class hand_positions : MonoBehaviour {
         }
         if (Input.GetKeyDown("space"))
         {
-            pf.addToPlayPanel();
+            if (inPlay)
+                pf.space();
+            else
+                pf.addToPlayPanel();
         }
         if (Input.GetKeyDown("down") || Input.GetKeyDown("up"))
         {
             inPlay = !inPlay;
             if (inPlay)
             {
-                hand.gameObject.SetActive(false);
-                pf.highlight();
+                toPlayMode();
             }
             else
             {
-                pf.unhighlight();
-                hand.gameObject.SetActive(true);
+                toEditMode();
             }
         }
+        if (Input.GetKeyDown("p"))
+        {
+            pf.play();
+        }
 	}
+
+    public void toPlayMode()
+    {
+        hand.gameObject.SetActive(false);
+        pf.highlight();
+    }
+
+    public void toEditMode()
+    {
+        pf.unhighlight();
+        hand.gameObject.SetActive(true);
+    }
 
 
 }
