@@ -147,6 +147,7 @@ public class hand_positions : MonoBehaviour {
 
     public void toPlayMode()
     {
+        unhighlight();
         hand.gameObject.SetActive(false);
         pf.highlight();
     }
@@ -155,6 +156,7 @@ public class hand_positions : MonoBehaviour {
     {
         pf.unhighlight();
         hand.gameObject.SetActive(true);
+        highlight();
     }
 
 

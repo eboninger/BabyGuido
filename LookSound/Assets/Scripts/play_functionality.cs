@@ -8,12 +8,14 @@ public class play_functionality : MonoBehaviour {
     public int total_play_objects;
     public int play_index;
     public GameObject currentHighlighted;
+    public float[] widths;
     public Transform hand;
 
     // Use this for initialization
     void Start () {
         hp = GameObject.Find("Unhighlighted").GetComponent<hand_positions>();
         playObjects = new GameObject[MAX_PLAY_OBJECTS];
+        widths = new float[MAX_PLAY_OBJECTS / 2];
         total_play_objects = 0;
         play_index = 0;
     }
@@ -42,7 +44,11 @@ public class play_functionality : MonoBehaviour {
         playObjects[total_play_objects * 2] = newChild;
         playObjects[(total_play_objects * 2)     + 1] = newHChild;
 
+        var bc = newChild.GetComponent<BoxCollider2D>();
+        widths[total_play_objects] = bc.size.x;
+
         total_play_objects++;  
+       
     }
 
     public void moveLeft()
@@ -111,10 +117,14 @@ public class play_functionality : MonoBehaviour {
 
     public void movehand()
     {
-        //var rectTrans = playObjects[(play_index * 2) + 1].GetComponent<RectTransform>();
-        //Vector3[] corners = new Vector3[4];
-        //rectTrans.GetWorldCorners(corners);
-        //print(corners[3]);
+        //var sum = 0.0f;
+        //for (int i = 0; i <= play_index; i++)
+        //{
+        //    sum += widths[i];
+        //}
+
+        //var new_pos = new Vector3(sum + 0.5f, 1.0f);
+        //hand.position = new_pos;
     }
 
     public void play()
