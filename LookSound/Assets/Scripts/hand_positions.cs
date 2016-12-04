@@ -66,7 +66,7 @@ public class hand_positions : MonoBehaviour {
 
 
     // move the hand to the position of 'current'
-    void movehand()
+    public void movehand()
     {
         var new_pos = new Vector3(possible_positions[currentI].x, possible_positions[currentI].y);
         hand.position = new_pos;
@@ -106,57 +106,66 @@ public class hand_positions : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("right"))
+        if (!pf.playing)
         {
-            if (inPlay)
-                pf.moveRight();
-            else
-                updateHandAndMouse(1);
-        }
-        if (Input.GetKeyDown("left"))
-        {
-            if (inPlay)
-                pf.moveLeft();
-            else
-                updateHandAndMouse(-1);
-        }
-        if (Input.GetKeyDown("space"))
-        {
-            if (inPlay)
-                pf.space();
-            else
-                pf.addToPlayPanel();
-        }
-        if (Input.GetKeyDown("down") || Input.GetKeyDown("up"))
-        {
-            inPlay = !inPlay;
-            if (inPlay)
+            if (Input.GetKeyDown("right"))
             {
-                toPlayMode();
+                if (inPlay)
+                    pf.moveRight();
+                else
+                    updateHandAndMouse(1);
             }
-            else
+            if (Input.GetKeyDown("left"))
             {
-                toEditMode();
+                if (inPlay)
+                    pf.moveLeft();
+                else
+                    updateHandAndMouse(-1);
             }
-        }
-        if (Input.GetKeyDown("p"))
+            if (Input.GetKeyDown("space"))
+            {
+                if (inPlay)
+                    pf.space();
+                else
+                    pf.addToPlayPanel();
+            }
+            if (Input.GetKeyDown("down") || Input.GetKeyDown("up"))
+            {
+                inPlay = !inPlay;
+                if (inPlay)
+                {
+                    toPlayMode();
+                }
+                else
+                {
+                    toEditMode();
+                }
+            }
+            if (Input.GetKeyDown("p"))
+            {
+                pf.play();
+            }
+        }        
+        if (Input.GetKeyDown("escape"))
         {
-            pf.play();
+            Application.Quit();
         }
 	}
 
     public void toPlayMode()
     {
         unhighlight();
-        hand.gameObject.SetActive(false);
+        //hand.gameObject.SetActive(false);
         pf.highlight();
+        pf.movehand();
     }
 
     public void toEditMode()
     {
         pf.unhighlight();
-        hand.gameObject.SetActive(true);
+        //hand.gameObject.SetActive(true);
         highlight();
+        movehand();
     }
 
 

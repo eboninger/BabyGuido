@@ -4,7 +4,8 @@ using System.Collections;
 public class play_functionality : MonoBehaviour {
     hand_positions hp;
     public GameObject[] playObjects;
-    public const int MAX_PLAY_OBJECTS = 20;
+    public bool playing;
+    public const int MAX_PLAY_OBJECTS = 16; // must be even
     public int total_play_objects;
     public int play_index;
     public GameObject currentHighlighted;
@@ -18,6 +19,7 @@ public class play_functionality : MonoBehaviour {
         widths = new float[MAX_PLAY_OBJECTS / 2];
         total_play_objects = 0;
         play_index = 0;
+        playing = false;
     }
 	
 	// Update is called once per frame
@@ -117,14 +119,14 @@ public class play_functionality : MonoBehaviour {
 
     public void movehand()
     {
-        //var sum = 0.0f;
-        //for (int i = 0; i <= play_index; i++)
-        //{
-        //    sum += widths[i];
-        //}
+        var sum = 0.0f;
+        for (int i = 0; i <= play_index; i++)
+        {
+            sum += widths[i];
+        }
 
-        //var new_pos = new Vector3(sum + 0.5f, 1.0f);
-        //hand.position = new_pos;
+        var new_pos = new Vector3(sum + 0.65f, 1.0f);
+        hand.position = new_pos;
     }
 
     public void play()
@@ -134,18 +136,33 @@ public class play_functionality : MonoBehaviour {
         StartCoroutine(PlaySoundList());
         play_index = old_play_index;
         highlight();
+
     }
 
     IEnumerator PlaySoundList()
     {
+        playing = true;
         for (int i = 0; i < total_play_objects; i++)
         {
             play_index = i;
             highlight();
+            movehand();
             AudioSource audio = playObjects[(i * 2) + 1].GetComponent<AudioSource>();
             audio.Play();
             yield return new WaitForSecondsRealtime(audio.clip.length);
             unhighlight();
+            if (i == (total_play_objects-1))
+            {
+                if (hp.inPlay)
+                {
+                    movehand();
+                }
+                else
+                {
+                    hp.movehand();                    
+                }
+                playing = false;
+            }
         }
 
     }
