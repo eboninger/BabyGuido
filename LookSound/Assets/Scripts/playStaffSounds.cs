@@ -19,6 +19,10 @@ public class playStaffSounds : MonoBehaviour {
 		print("in play");
 		foreach(Transform child in staff.transform){
 			print("play " + child.name + "s sound");
+			AudioSource audio = child.GetComponent<AudioSource>();
+			if(audio){
+				audio.Play();
+			}
 		}
 
 
