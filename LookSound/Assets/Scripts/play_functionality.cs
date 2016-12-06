@@ -11,6 +11,7 @@ public class play_functionality : MonoBehaviour {
     public GameObject currentHighlighted;
     public float[] widths;
     public Transform hand;
+    public float screen_offset;
 
     // Use this for initialization
     void Start () {
@@ -20,6 +21,12 @@ public class play_functionality : MonoBehaviour {
         total_play_objects = 0;
         play_index = 0;
         playing = false;
+
+        Vector2 topRightCorner = new Vector2(1, 1);
+        Vector2 edgeVector = Camera.main.ViewportToWorldPoint(topRightCorner);
+
+        screen_offset = (edgeVector.x * 2) * 0.1f;
+        print("SCREEN OFFSET " + screen_offset);
     }
 	
 	// Update is called once per frame
@@ -125,7 +132,8 @@ public class play_functionality : MonoBehaviour {
             sum += widths[i];
         }
 
-        var new_pos = new Vector3(sum + 4.65f, 1.0f);
+
+        var new_pos = new Vector3(sum + screen_offset, 1.0f);
         hand.position = new_pos;
     }
 

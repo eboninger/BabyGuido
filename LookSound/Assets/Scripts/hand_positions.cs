@@ -75,7 +75,7 @@ public class hand_positions : MonoBehaviour {
     // highlight the object at index 'currentI'
     void highlight()
     {
-        if (currentI < 5)
+        if (currentI < MAX_OBJECTS)
         {
             var pre_inf = soundObjects[currentI].GetComponent<object_info>();
             pre_inf.highlighted.GetComponent<SpriteRenderer>().sortingLayerName = "Foreground";
@@ -86,7 +86,7 @@ public class hand_positions : MonoBehaviour {
     // unhighlight the object at index 'currentI'
     void unhighlight()
     {
-        if (currentI < 5)
+        if (currentI < MAX_OBJECTS)
         {
             var pre_inf = soundObjects[currentI].GetComponent<object_info>();
             pre_inf.highlighted.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
@@ -129,7 +129,7 @@ public class hand_positions : MonoBehaviour {
                 else
                     pf.addToPlayPanel();
             }
-            if (Input.GetKeyDown("down") || Input.GetKeyDown("up"))
+            if ((Input.GetKeyDown("down") || Input.GetKeyDown("up")) && (pf.total_play_objects > 0))
             {
                 inPlay = !inPlay;
                 if (inPlay)
