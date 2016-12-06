@@ -16,7 +16,7 @@ Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksou
 Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.142 seconds
+- Completed reload, in  0.063 seconds
 Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound_Data\Managed\System.dll (this message is harmless)
 desktop: 1600x900 40Hz; virtual: 1600x900 at 0,0
@@ -31,7 +31,7 @@ The referenced script on this Behaviour (Game Object 'playBirdH') is missing!
  
 (Filename:  Line: 1656)
 
-UnloadTime: 1.397665 ms
+UnloadTime: 1.094900 ms
 CURRENTI = 1 and TOTALSOUNDOBJECTS = 5
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
@@ -41,5 +41,5 @@ CURRENTI = 2 and TOTALSOUNDOBJECTS = 5
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 5108 -> priority: 1 
-  Thread -> id: 5ec -> priority: 1 
+  Thread -> id: 51f8 -> priority: 1 
+  Thread -> id: 6008 -> priority: 1 
