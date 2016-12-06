@@ -129,7 +129,13 @@ public class touchHand : MonoBehaviour {
 				}
 				genUI.objectGrabbed(true);
 
-			} 
+			} else if(hit.transform.tag == "Player"){
+				print("hit the bird!");
+				playStaffSounds sounds = hit.transform.GetComponent<playStaffSounds>();
+				if(sounds){
+					sounds.play();
+				}
+			}
 		}
 	}
 
