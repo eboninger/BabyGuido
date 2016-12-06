@@ -17,7 +17,7 @@ public class Coordinate
 
 public class hand_positions : MonoBehaviour {
 
-    public int MAX_OBJECTS = 5; // total possible objects
+    public int MAX_OBJECTS = 6; // total possible objects
     public Coordinate[] possible_positions;
     public GameObject[] soundObjects;  // array of all sound objects
     public int totalSoundObjects;  // number of sound objects in soundObjects array

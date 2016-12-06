@@ -17,7 +17,7 @@ public class object_info : MonoBehaviour {
         } else if (transform.name == "Wave")
         {
             sizeRatioX = 1.0f;
-            sizeRatioY = 0.8f;
+            sizeRatioY = 1.0f;
         } else
         {
             sizeRatioX = 1.0f;

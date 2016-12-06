@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\generateUIElement.cs" />
     <Compile Include="Assets\Scripts\hand_positions.cs" />
     <Compile Include="Assets\Scripts\object_info.cs" />
+    <Compile Include="Assets\Scripts\playStaffSounds.cs" />
     <Compile Include="Assets\Scripts\play_functionality.cs" />
     <Compile Include="Assets\Scripts\touchHand.cs" />
     <Compile Include="Assets\Scripts\touchscreen.cs" />

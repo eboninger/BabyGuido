@@ -29,7 +29,7 @@ public class play_functionality : MonoBehaviour {
 
     public void addToPlayPanel()
     {
-        if (total_play_objects >= 10)
+        if (total_play_objects >= (MAX_PLAY_OBJECTS / 2))
             return;
 
         var pi = hp.soundObjects[hp.currentI].GetComponent<object_info>();
@@ -125,7 +125,7 @@ public class play_functionality : MonoBehaviour {
             sum += widths[i];
         }
 
-        var new_pos = new Vector3(sum + 0.65f, 1.0f);
+        var new_pos = new Vector3(sum + 4.65f, 1.0f);
         hand.position = new_pos;
     }
 
