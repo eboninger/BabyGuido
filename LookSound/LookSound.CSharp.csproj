@@ -99,14 +99,17 @@
     <Compile Include="Assets\Example Games\Hat Trick - The Catch Game\Scripts\HT_Score.cs" />
     <Compile Include="Assets\Example Games\Hat Trick - The Catch Game\Scripts\HT_SetParticleSortingLayer.cs" />
     <Compile Include="Assets\Example Games\Hat Trick - The Catch Game\Scripts\HT_StartGame.cs" />
-    <Compile Include="Assets\Scripts\generateChild.cs" />
-    <Compile Include="Assets\Scripts\generateUIElement.cs" />
-    <Compile Include="Assets\Scripts\hand_positions.cs" />
-    <Compile Include="Assets\Scripts\object_info.cs" />
-    <Compile Include="Assets\Scripts\playStaffSounds.cs" />
-    <Compile Include="Assets\Scripts\play_functionality.cs" />
-    <Compile Include="Assets\Scripts\touchHand.cs" />
-    <Compile Include="Assets\Scripts\touchscreen.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\generateChild.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\generateUIElement.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\hand_positions.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\object_info.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\playStaffSounds.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\play_functionality.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\touchHand.cs" />
+    <Compile Include="Assets\Scripts\Beach Scripts\touchscreen.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\addFruitToStaff.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\backing_track.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\score.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Example Games\2D Scrolling Shooter\Fonts\PressStart2P-Regular\OFL.txt" />

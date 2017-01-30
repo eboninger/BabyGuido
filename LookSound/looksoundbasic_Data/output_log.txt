@@ -16,7 +16,7 @@ Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksou
 Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksoundbasic_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksoundbasic_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksoundbasic_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.489 seconds
+- Completed reload, in  0.097 seconds
 Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksoundbasic_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksoundbasic_Data\Managed\System.dll (this message is harmless)
 desktop: 1600x900 40Hz; virtual: 1600x900 at 0,0
@@ -31,7 +31,7 @@ The referenced script on this Behaviour (Game Object 'playBirdH') is missing!
  
 (Filename:  Line: 1656)
 
-UnloadTime: 264.538544 ms
+UnloadTime: 0.889167 ms
 SCREEN OFFSET 4.275112
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
@@ -48,7 +48,31 @@ CURRENTI = 3 and TOTALSOUNDOBJECTS = 6
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
+CURRENTI = 4 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 5 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 4 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 3 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
 CURRENTI = 2 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 1 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 0 and TOTALSOUNDOBJECTS = 6
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
@@ -96,6 +120,30 @@ CURRENTI = 5 and TOTALSOUNDOBJECTS = 6
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
+CURRENTI = 4 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 5 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 4 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 3 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 2 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+CURRENTI = 1 and TOTALSOUNDOBJECTS = 6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 495c -> priority: 1 
-  Thread -> id: 26bc -> priority: 1 
+  Thread -> id: 23cc -> priority: 1 
+  Thread -> id: 2bbc -> priority: 1 
