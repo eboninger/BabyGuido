@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Beach Scripts\touchscreen.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\addFruitToStaff.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\backing_track.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\fadeFruit.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\score.cs" />
   </ItemGroup>
   <ItemGroup>
