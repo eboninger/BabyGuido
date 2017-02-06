@@ -7,8 +7,11 @@ public class score : MonoBehaviour {
 
     public backing_track bt;
     public Text score_notification;
+    public Text chord_notification;
     public Dictionary<string,AudioSource> notes;
     int on_streak = 0;
+    int off_streak = 0;
+    bool on_chord = false;
 
 
 	// Use this for initialization
@@ -16,6 +19,8 @@ public class score : MonoBehaviour {
     {
         notes = new Dictionary<string, AudioSource>();
         var sources = this.GetComponentsInParent<AudioSource>();
+        chord_notification.enabled = false;
+        chord_notification.text = "Great Chord!";
 
         notes.Add("a", sources[1]);
         notes.Add("s", sources[2]);
@@ -36,10 +41,24 @@ public class score : MonoBehaviour {
             foreach (char c in Input.inputString)
             {
                 notes[c.ToString()].PlayOneShot(notes[c.ToString()].clip, 1);
-                beat_check();
+            }
+            beat_check();
+
+            if ((Input.inputString.Length > 1) && (!on_chord))
+            {
+                StartCoroutine(chord_played());
             }
         }
         
+    }
+
+    IEnumerator chord_played()
+    {
+        chord_notification.enabled = true;
+        on_chord = true;
+        yield return new WaitForSeconds(2);
+        on_chord = false;
+        chord_notification.enabled = false;
     }
 
     void beat_check()
@@ -47,15 +66,27 @@ public class score : MonoBehaviour {
         if (bt.checkOnBeat())
         {
             on_streak++;
+            off_streak = 0;
             if (on_streak > 3)
             {
                 score_notification.text = "On the beat streak! Length " + on_streak.ToString();
                 score_notification.enabled = true;
             }
         }
+        else if (bt.checkOffBeat())
+        {
+            off_streak++;
+            on_streak = 0;
+            if (off_streak > 3)
+            {
+                score_notification.text = "Off the beat streak!  Length " + off_streak.ToString();
+                score_notification.enabled = true;
+            }
+        }
         else
         {
             on_streak = 0;
+            off_streak = 0;
             score_notification.enabled = false;
         }
     }
