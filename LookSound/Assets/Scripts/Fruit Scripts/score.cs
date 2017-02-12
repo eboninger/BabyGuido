@@ -12,6 +12,7 @@ public class score : MonoBehaviour {
     int on_streak = 0;
     int off_streak = 0;
     bool on_chord = false;
+    bool first_press = true;
 
 
 	// Use this for initialization
@@ -38,6 +39,11 @@ public class score : MonoBehaviour {
     {
         if (Input.anyKeyDown)
         {
+            if (first_press)
+            {
+                bt.setBeat();
+                first_press = false;
+            }
             foreach (char c in Input.inputString)
             {
                 //notes[c.ToString()].PlayOneShot(notes[c.ToString()].clip, 1);

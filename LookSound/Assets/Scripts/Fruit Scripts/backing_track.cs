@@ -7,14 +7,11 @@ public class backing_track : MonoBehaviour {
 
     public AudioSource bt;
     public float sampling_rate;
-    public const int BEAT_MOD = 22008;
-    public const int BEAT = 16244;
-    public const int OFFBEAT = 4439;
-    public const int DIF = 2000;
-    public const int BEAT_LO = BEAT - DIF;
-    public const int BEAT_HI = BEAT + DIF;
-    public const int OFFBEAT_LO = OFFBEAT - DIF;
-    public const int OFFBEAT_HI = OFFBEAT + DIF;
+    public const float BEAT_MOD = 0.5f;
+    private float BEAT, BEAT_LO, BEAT_HI, OFFBEAT_LO, OFFBEAT_HI;
+    public const float OFFBEAT = 4439.0f;
+    public const float DIF = 0.04f;
+
 
     // Use this for initialization
     void Start()
@@ -30,10 +27,18 @@ public class backing_track : MonoBehaviour {
 
     }
 
+    public void setBeat()
+    {
+        BEAT = (bt.timeSamples * sampling_rate) % BEAT_MOD;
+        BEAT_LO = BEAT - DIF;
+        BEAT_HI = BEAT + DIF;
+        OFFBEAT_LO = OFFBEAT - DIF;
+        OFFBEAT_HI = OFFBEAT + DIF;
+    }
+
     public bool checkOnBeat()
     {
-        var ts_mod = bt.timeSamples % BEAT_MOD;
-        print(ts_mod);
+        var ts_mod = (bt.timeSamples * sampling_rate) % BEAT_MOD;
         if ((ts_mod > BEAT_LO) && (ts_mod < BEAT_HI))
         {
             return true;
