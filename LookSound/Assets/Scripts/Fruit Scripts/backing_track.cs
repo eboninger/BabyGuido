@@ -1,27 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Timer : MonoBehaviour
-{
-    private float start_time;
-
-    public void begin_timer()
-    {
-        start_time = Time.time;
-    }
-
-    public float get_time()
-    {
-        return Time.time - start_time;
-    }
-}
-
 
 
 public class backing_track : MonoBehaviour {
 
     public AudioSource bt;
-    public Timer timer; 
+    public float sampling_rate;
     public const int BEAT_MOD = 22008;
     public const int BEAT = 16244;
     public const int OFFBEAT = 4439;
@@ -34,9 +19,8 @@ public class backing_track : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        timer = new Timer();
-        bt.Play();
-        timer.begin_timer();       
+        sampling_rate = 1.0f / bt.clip.frequency;
+        bt.Play();     
     }
 
     // Update is called once per frame
@@ -48,7 +32,7 @@ public class backing_track : MonoBehaviour {
     public bool checkOnBeat()
     {
         var ts_mod = bt.timeSamples % BEAT_MOD;
-        print(timer.get_time());
+        print((bt.timeSamples * 1.0f) * sampling_rate);
         if ((ts_mod > BEAT_LO) && (ts_mod < BEAT_HI))
         {
             return true;
