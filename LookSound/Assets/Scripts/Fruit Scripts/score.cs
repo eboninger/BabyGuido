@@ -46,7 +46,7 @@ public class score : MonoBehaviour {
             }
             foreach (char c in Input.inputString)
             {
-                //notes[c.ToString()].PlayOneShot(notes[c.ToString()].clip, 1);
+                notes[c.ToString()].PlayOneShot(notes[c.ToString()].clip, 1);
             }
             beat_check();
 
