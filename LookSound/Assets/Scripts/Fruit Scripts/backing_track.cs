@@ -10,7 +10,7 @@ public class backing_track : MonoBehaviour {
     public const float BEAT_MOD = 0.5f;
     private float BEAT, BEAT_LO, BEAT_HI, OFFBEAT_LO, OFFBEAT_HI;
     public const float OFFBEAT = 4439.0f;
-    public const float DIF = 0.04f;
+    public const float DIF = 0.1f;
 
 
     // Use this for initialization
