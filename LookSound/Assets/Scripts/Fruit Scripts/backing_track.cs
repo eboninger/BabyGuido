@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 
@@ -8,8 +9,7 @@ public class backing_track : MonoBehaviour {
     public AudioSource bt;
     public float sampling_rate;
     public const float BEAT_MOD = 0.5f;
-    private float BEAT, BEAT_LO, BEAT_HI, OFFBEAT_LO, OFFBEAT_HI;
-    public const float OFFBEAT = 4439.0f;
+    private float BEAT, OFFBEAT, BEAT_LO, BEAT_HI, OFFBEAT_LO, OFFBEAT_HI;
     public const float DIF = 0.1f;
 
 
@@ -32,6 +32,7 @@ public class backing_track : MonoBehaviour {
         BEAT = (bt.timeSamples * sampling_rate) % BEAT_MOD;
         BEAT_LO = BEAT - DIF;
         BEAT_HI = BEAT + DIF;
+        OFFBEAT = Math.Abs(BEAT - 0.25f);
         OFFBEAT_LO = OFFBEAT - DIF;
         OFFBEAT_HI = OFFBEAT + DIF;
     }
