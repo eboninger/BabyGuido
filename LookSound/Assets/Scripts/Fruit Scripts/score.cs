@@ -18,7 +18,7 @@ public class Note
 public class score : MonoBehaviour {
 
     public backing_track bt;
-    public Text rhythm_notification, chord_notification, scale_notification;
+    public Text rhythm_notification, chord_notification, scale_notification, score_display;
     public Dictionary<string, Note> notes;
     int on_streak = 0, off_streak = 0, prev_note = -10, scale_up = 0, scale_down = 0, user_score = 0;
     bool on_chord = false, first_press = true, on_scale = false;
@@ -59,7 +59,7 @@ public class score : MonoBehaviour {
             foreach (char c in Input.inputString)
             {
                 input_note = notes[c.ToString()];
-                input_note.sample.Play();
+                //input_note.sample.Play();
             }
             give_points();
         }
@@ -108,8 +108,13 @@ public class score : MonoBehaviour {
         }
     }
 
+    // if the given notification is not already being displayed (i.e. is_on is false), show it 
+    // with the given message and increment the total score by score_increase
     IEnumerator notification(Text notif, string message, bool is_on, int score_increase)
     {
+        user_score += score_increase;
+        score_display.text = "Score: " + user_score;
+
         if (!is_on)
         {
             notif.text = message;
@@ -119,29 +124,38 @@ public class score : MonoBehaviour {
             is_on = false;
             notif.enabled = false;
         }
-        user_score += score_increase;
     }
 
     void beat_check()
     {
         if (bt.checkOnBeat())
         {
+            if (on_streak == 0)
+            {
+                rhythm_notification.enabled = false;
+            }
             on_streak++;
             off_streak = 0;
             if (on_streak > 3)
             {
                 rhythm_notification.text = "On the beat streak! Length " + on_streak.ToString();
                 rhythm_notification.enabled = true;
+                rhythm_score_increase(2);
             }
         }
         else if (bt.checkOffBeat())
         {
+            if (off_streak == 0)
+            {
+                rhythm_notification.enabled = false;
+            }
             off_streak++;
             on_streak = 0;
             if (off_streak > 3)
             {
                 rhythm_notification.text = "Off the beat streak!  Length " + off_streak.ToString();
                 rhythm_notification.enabled = true;
+                rhythm_score_increase(3);
             }
         }
         else
@@ -150,6 +164,12 @@ public class score : MonoBehaviour {
             off_streak = 0;
             rhythm_notification.enabled = false;
         }
+    }
+
+    void rhythm_score_increase(int increase_by)
+    {
+        user_score += increase_by;
+        score_display.text = "Score: " + user_score;
     }
 
 }
