@@ -4,12 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class fruitWithLocation{
+	//the prefab/image for the fruit
 	private GameObject o;
+	//fruit's position in the game space
 	private Vector3 pos;
+	private float ypos;
+	private float xpos;
+	//offset from the begining of the music staff
+	private const float xoffset = 3.0f; 
+	//scales how close or far the fruits are on the x axis
+	private const float xseparationScale = 2.50f; 
+	//scales distance between half steps on the scale
+	private const float yseparationScale = .8f; 
 
-	public fruitWithLocation(GameObject gameObj, Vector3 location){
+	public fruitWithLocation(GameObject gameObj, float y, float order){
 		o = gameObj;
-		pos = location;
+		//subtraction bc of how we set up the staff in world space
+		ypos = y + (order * yseparationScale);
+		xpos = xoffset + (order * xseparationScale);
+		pos = new Vector3(xpos, ypos, 0f);
 	}
 
 	public GameObject getObject(){
@@ -22,22 +35,36 @@ public class fruitWithLocation{
 }
 
 public class addFruitToStaff : MonoBehaviour {
-	
+
+	//all notes will be relative to the lowest (visually, not in world space) note on the staff
+	public float lowestNoteYPos = 6.2f;
 	public GameObject apple;
 	public GameObject banana;
 	public GameObject cherry;
-	public GameObject date;
+	public GameObject dragonfruit;
 	public GameObject eggplant;
+	public GameObject fig;
+	public GameObject grape;
 	private Dictionary<char, fruitWithLocation> fruit;
 	// Use this for initialization
 	void Start () {
 		fruit = new Dictionary<char, fruitWithLocation>();
-		fruitWithLocation a = new fruitWithLocation(apple, new Vector3 (10f,13.33f,0f));
-		fruitWithLocation b = new fruitWithLocation(banana, new Vector3 (8.6f,9.5f,0f));
-		fruitWithLocation c = new fruitWithLocation(cherry, new Vector3 (11.6f,10f,0f));
-		fruit.Add('a', a);
-		fruit.Add('b', b);
-		fruit.Add('c', c);
+		fruitWithLocation lowd = new fruitWithLocation(dragonfruit, lowestNoteYPos, 0);
+		fruitWithLocation e = new fruitWithLocation(eggplant, lowestNoteYPos, 1);
+		fruitWithLocation f = new fruitWithLocation(fig, lowestNoteYPos, 2);
+		fruitWithLocation g = new fruitWithLocation(grape, lowestNoteYPos, 3);
+		fruitWithLocation a = new fruitWithLocation(apple, lowestNoteYPos, 4);
+		fruitWithLocation b = new fruitWithLocation(banana, lowestNoteYPos, 5);
+		fruitWithLocation c = new fruitWithLocation(cherry, lowestNoteYPos, 6);
+		fruitWithLocation highd = new fruitWithLocation(dragonfruit, lowestNoteYPos, 7);
+		fruit.Add('a', lowd);
+		fruit.Add('s', e);
+		fruit.Add('d', f);
+		fruit.Add('f', g);
+		fruit.Add('g', a);
+		fruit.Add('h', b);
+		fruit.Add('j', c);
+		fruit.Add('k', highd);
 	
 	}
 	
