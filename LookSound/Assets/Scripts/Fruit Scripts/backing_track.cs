@@ -17,8 +17,7 @@ public class backing_track : MonoBehaviour {
     void Start()
     {
         sampling_rate = 1.0f / bt.clip.frequency;
-        bt.Play();
-        print("TIME: " + Time.time * 1.0f);     
+        bt.Play();   
     }
 
     // Update is called once per frame
@@ -32,7 +31,7 @@ public class backing_track : MonoBehaviour {
         BEAT = (bt.timeSamples * sampling_rate) % BEAT_MOD;
         BEAT_LO = BEAT - DIF;
         BEAT_HI = BEAT + DIF;
-        OFFBEAT = Math.Abs(BEAT - 0.25f);
+        OFFBEAT = Math.Abs(BEAT + 0.25f);
         OFFBEAT_LO = OFFBEAT - DIF;
         OFFBEAT_HI = OFFBEAT + DIF;
     }
@@ -50,7 +49,7 @@ public class backing_track : MonoBehaviour {
 
     public bool checkOffBeat()
     {
-        var ts_mod = bt.timeSamples % BEAT_MOD;
+        var ts_mod = (bt.timeSamples * sampling_rate) % BEAT_MOD;
         if ((ts_mod > OFFBEAT_LO) && (ts_mod < OFFBEAT_HI))
         {
             return true;
