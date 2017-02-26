@@ -8,7 +8,6 @@ public class score_rhythm : MonoBehaviour
 {
 
     public backing_track bt;
-    public Text countdown;
     public Dictionary<string, Note> notes;
     int user_score = 0;
     bool first_press = true;
@@ -55,7 +54,7 @@ public class score_rhythm : MonoBehaviour
 
         if (Input.GetKeyDown("a"))
         {
-            RhythmicSequence rs = new RhythmicSequence("hhqqq");
+            RhythmicSequence rs = new RhythmicSequence("eeqeeqssssq");
             rhythm.play_rhythm(rs, notes["a"].sample, true);
         }
 

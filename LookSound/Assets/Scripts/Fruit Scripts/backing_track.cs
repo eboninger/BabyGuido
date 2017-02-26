@@ -84,12 +84,17 @@ public class backing_track : MonoBehaviour {
     {
         var ts_mod = (bt.timeSamples * sampling_rate) % MEASURE_MOD;
 
-        if ((ts_mod > (MEASURE_LO - (BEAT * 4))) && (ts_mod < (MEASURE_HI - (BEAT * 4))))
+        if ((ts_mod > (MEASURE_LO - (BEAT_MOD * 4))) && (ts_mod < (MEASURE_HI - (BEAT_MOD * 4))))
         {
             return true;
         }
 
         return false;
+    }
+
+    public void print_ts_mod()
+    {
+        print((bt.timeSamples * sampling_rate) % MEASURE_MOD);
     }
 }
 
