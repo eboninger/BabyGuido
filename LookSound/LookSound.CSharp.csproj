@@ -119,10 +119,12 @@
     <Compile Include="Assets\Scripts\Beach Scripts\play_functionality.cs" />
     <Compile Include="Assets\Scripts\Beach Scripts\touchHand.cs" />
     <Compile Include="Assets\Scripts\Beach Scripts\touchscreen.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\Rhythm.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\addFruitToStaff.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\backing_track.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\fadeFruit.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\score.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\score_rhythm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Example Games\2D Scrolling Shooter\Fonts\PressStart2P-Regular\OFL.txt" />

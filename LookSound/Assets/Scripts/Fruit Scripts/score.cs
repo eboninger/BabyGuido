@@ -51,7 +51,7 @@ public class score : MonoBehaviour {
             // to calibrate the rhythm
             if (first_press)
             {
-                bt.setBeat();
+                bt.setBeat(false);
                 first_press = false;
             }
 
@@ -59,10 +59,11 @@ public class score : MonoBehaviour {
             foreach (char c in Input.inputString)
             {
                 input_note = notes[c.ToString()];
-                input_note.sample.Play();
+                //input_note.sample.Play();
             }
             give_points();
         }
+        
 
     }
 
