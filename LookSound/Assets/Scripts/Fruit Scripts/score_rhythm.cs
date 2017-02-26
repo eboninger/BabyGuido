@@ -48,13 +48,13 @@ public class score_rhythm : MonoBehaviour
             foreach (char c in Input.inputString)
             {
                 input_note = notes[c.ToString()];
-                //input_note.sample.Play();
+                input_note.sample.Play();
             }
         }
 
         if (Input.GetKeyDown("a"))
         {
-            RhythmicSequence rs = new RhythmicSequence("eeqeeqssssq");
+            RhythmicSequence rs = new RhythmicSequence("hhqqq");
             rhythm.play_rhythm(rs, notes["a"].sample, true);
         }
 

@@ -234,5 +234,6 @@ public class Rhythm : MonoBehaviour {
         current_rhythm.start_time();
         countdown_notification.text = "GO!";
         yield return new WaitForSecondsRealtime(0.4f);
+        countdown_notification.text = "";
     }
 }
