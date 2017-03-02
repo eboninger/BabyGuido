@@ -48,7 +48,7 @@ public class score_rhythm : MonoBehaviour
             foreach (char c in Input.inputString)
             {
                 input_note = notes[c.ToString()];
-                input_note.sample.Play();
+                //input_note.sample.Play();
             }
         }
 
