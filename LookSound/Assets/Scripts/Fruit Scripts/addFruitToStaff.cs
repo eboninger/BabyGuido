@@ -74,12 +74,9 @@ public class addFruitToStaff : MonoBehaviour {
 	}
 
 	void keyPressed(){
-		if (Input.anyKeyDown)
-		{
-			foreach (char c in Input.inputString)
-			{
+		if (Input.anyKeyDown){
+			foreach (char c in Input.inputString){
 				createObject(c);
-
 			}
 		}
 	}
@@ -92,8 +89,7 @@ public class addFruitToStaff : MonoBehaviour {
 			//move it to the correct position on the staff
 			newObj.transform.position = fruit[c].getPosition();
 			fadeOn(newObj);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			print("Error: no fruit associated with " + c.ToString());
 		}  
 	}
