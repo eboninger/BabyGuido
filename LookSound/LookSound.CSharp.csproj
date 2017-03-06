@@ -123,6 +123,9 @@
     <Compile Include="Assets\Scripts\Fruit Scripts\addFruitToStaff.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\backing_track.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\fadeFruit.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\moveBar.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\noteOnKeyPress.cs" />
+    <Compile Include="Assets\Scripts\Fruit Scripts\rhythmFruit.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\score.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\score_rhythm.cs" />
   </ItemGroup>
