@@ -7,17 +7,48 @@ public class RhythmicSequence
 {
     private List<char> seq;
     private List<float> durations;
-    private float time_in;
-    private int current_index;
+    private float time_in, total_length;
+    private int current_index, num_correct, num_wrong;
     private float[] durations_arr;
+    public const float MARGIN_OF_ERROR = 0.1f;
 
     public RhythmicSequence(string s)
     {
         seq = new List<char>();
+        total_length = 0.0f;
+        time_in = -1.0f;
+
         foreach (char c in s)
         {
             seq.Add(c);
         }
+    }
+
+    public void reset()
+    {
+        current_index = 0;
+        num_correct = 0;
+        num_wrong = 0;
+    }
+
+    public int get_num_correct()
+    {
+        return num_correct;
+    }
+    
+    public int get_num_wrong()
+    {
+        return num_wrong;
+    }
+
+    public void inc_num_correct()
+    {
+        num_correct++;
+    }
+
+    public void inc_num_wrong()
+    {
+        num_wrong++;
     }
 
     public void start_time()
@@ -27,17 +58,31 @@ public class RhythmicSequence
 
     public bool on_beat()
     {
-        float delta = Time.unscaledTime - time_in;
-        float current_step = durations_arr[current_index];
-        current_index++;
-
-        Debug.Log("DELTA: " + delta + ", CURRENT_STEP: " + current_step);
-
-        if ((delta > (current_step - 0.1)) && (delta < (current_step + 0.1))) {
+        //Debug.Log(current_index);
+        if (time_in < 0.0f)
+        {
+            current_index++;
             return true;
         }
 
+        float delta = Time.unscaledTime - time_in;
+        float current_step = durations_arr[current_index];
+
+        if ((delta > (current_step - MARGIN_OF_ERROR)) && (delta < (current_step + MARGIN_OF_ERROR))) {
+            current_index++;
+            return true;
+        } else if (delta > (current_step + MARGIN_OF_ERROR))
+        {
+            current_index++;
+            return on_beat();
+        }
+
         return false;
+    }
+
+    public float get_total_length()
+    {
+        return total_length;
     }
 
     public bool finished()
@@ -80,7 +125,7 @@ public class RhythmicSequence
                     break;
             }
         }
-
+        total_length = tracking;
         durations_arr = durations.ToArray();
     }
 
@@ -99,6 +144,7 @@ public class Rhythm : MonoBehaviour {
     public bool finished_playing, listening;
     public Text countdown_notification, on_rhythm_notification;
     private RhythmicSequence current_rhythm;
+    private score_rhythm sr;
     private backing_track bt;
     private float beat, beat_len;
     private bool initialized;
@@ -109,6 +155,7 @@ public class Rhythm : MonoBehaviour {
         finished_playing = false;
         initialized = false;
         bt = GameObject.Find("Player").GetComponent<backing_track>();
+        sr = GameObject.Find("Player").GetComponent<score_rhythm>();
 	}
 	
 	// Update is called once per frame
@@ -120,14 +167,11 @@ public class Rhythm : MonoBehaviour {
                 if (current_rhythm.on_beat())
                 {
                     StartCoroutine(notification(on_rhythm_notification, "Good Rhythm!", false, 10));
+                    current_rhythm.inc_num_correct();
                 } else
                 {
                     StartCoroutine(notification(on_rhythm_notification, "Not quite!", false, 0));
-                }
-
-                if (current_rhythm.finished())
-                {
-                    listening = false;
+                    current_rhythm.inc_num_wrong();
                 }
             }
         }
@@ -225,15 +269,24 @@ public class Rhythm : MonoBehaviour {
 
     private IEnumerator countdown()
     {
-        for(int i = 4; i > 0; i--)
+        for(int i = 4; i > 1; i--)
         {
             countdown_notification.text = i.ToString();
             yield return new WaitForSecondsRealtime(beat_len);
         }
+
+        // to count being on beat even before timer is completely done
+        countdown_notification.text = "1";
+        yield return new WaitForSecondsRealtime(beat_len - 0.1f);
         listening = true;
+        yield return new WaitForSecondsRealtime(0.1f);
+
         current_rhythm.start_time();
         countdown_notification.text = "GO!";
         yield return new WaitForSecondsRealtime(0.4f);
         countdown_notification.text = "";
+        yield return new WaitForSecondsRealtime(current_rhythm.get_total_length() - 0.3f);
+        listening = false;
+        sr.SendMessage("receive_score", current_rhythm);
     }
 }

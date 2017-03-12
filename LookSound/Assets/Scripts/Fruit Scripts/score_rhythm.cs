@@ -13,6 +13,8 @@ public class score_rhythm : MonoBehaviour
     bool first_press = true;
     public Note input_note;
     public Rhythm rhythm;
+    public Text stats_display;
+    private LinkedList<RhythmicSequence> sequences;
 
 
     // Use this for initialization
@@ -20,8 +22,14 @@ public class score_rhythm : MonoBehaviour
     {
         rhythm = GameObject.Find("RhythmManager").GetComponent<Rhythm>();
         notes = new Dictionary<string, Note>();
+        sequences = new LinkedList<RhythmicSequence>();
         var sources = this.GetComponentsInParent<AudioSource>();
 
+        initialize_starting_params(sources);
+    }
+
+    private void initialize_starting_params(AudioSource[] sources)
+    {
         notes.Add("a", new Note(sources[1], 0));
         notes.Add("s", new Note(sources[2], 1));
         notes.Add("d", new Note(sources[3], 2));
@@ -30,6 +38,11 @@ public class score_rhythm : MonoBehaviour
         notes.Add("h", new Note(sources[6], 5));
         notes.Add("j", new Note(sources[7], 6));
         notes.Add("k", new Note(sources[8], 7));
+
+        sequences.AddLast(new RhythmicSequence("hhhh"));
+        sequences.AddLast(new RhythmicSequence("hhqqq"));
+        sequences.AddLast(new RhythmicSequence("wqqqq"));
+        sequences.AddLast(new RhythmicSequence("hqqqee"));
     }
 
     // Update is called once per frame
@@ -48,16 +61,30 @@ public class score_rhythm : MonoBehaviour
             foreach (char c in Input.inputString)
             {
                 input_note = notes[c.ToString()];
-                //input_note.sample.Play();
+                input_note.sample.Play();
             }
         }
 
         if (Input.GetKeyDown("a"))
         {
-            RhythmicSequence rs = new RhythmicSequence("hhqqq");
-            rhythm.play_rhythm(rs, notes["a"].sample, true);
+            sequences.First.Value.reset();
+            rhythm.play_rhythm(sequences.First.Value, notes["a"].sample, true);
         }
 
+    }
+
+    void receive_score(RhythmicSequence rs)
+    {
+        var num_correct = rs.get_num_correct();
+        var num_wrong = rs.get_num_wrong();
+
+        stats_display.text = ("On the last rhythm, you got\n" + num_correct.ToString() + " notes on the rhythm\n" + 
+                               num_wrong.ToString() + " notes off the rhythm\n");
+
+        if (((num_correct * 1.0f) / ((num_correct + num_wrong) * 1.0f)) > .85f)
+        {
+            sequences.RemoveFirst();
+        }
     }
 
 
