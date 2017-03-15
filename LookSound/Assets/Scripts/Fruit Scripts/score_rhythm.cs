@@ -55,22 +55,17 @@ public class score_rhythm : MonoBehaviour
             {
                 bt.setBeat(true);
                 first_press = false;
+                StartCoroutine(begin_challenge());
             }
 
             // play each note corresponding to buttons pressed
             foreach (char c in Input.inputString)
             {
                 input_note = notes[c.ToString()];
-                input_note.sample.Play();
+                //input_note.sample.Play();
             }
         }
-
-        if (Input.GetKeyDown("a"))
-        {
-            sequences.First.Value.reset();
-            rhythm.play_rhythm(sequences.First.Value, notes["a"].sample, true);
-        }
-
+ 
     }
 
     void receive_score(RhythmicSequence rs)
@@ -85,6 +80,15 @@ public class score_rhythm : MonoBehaviour
         {
             sequences.RemoveFirst();
         }
+
+        sequences.First.Value.reset();
+        rhythm.play_rhythm(sequences.First.Value, notes["a"].sample, true);
+    }
+
+    IEnumerator begin_challenge()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        rhythm.play_rhythm(sequences.First.Value, notes["a"].sample, true);
     }
 
 
