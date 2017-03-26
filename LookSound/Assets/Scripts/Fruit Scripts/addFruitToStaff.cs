@@ -13,15 +13,16 @@ public class fruitWithLocation{
 	//offset from the begining of the music staff
 	private const float xoffset = 3.0f; 
 	//scales how close or far the fruits are on the x axis
-	private const float xseparationScale = 2.50f; 
+	private const float xseparationScale = 2.70f; 
 	//scales distance between half steps on the scale
-	private const float yseparationScale = .8f; 
+	private const float yseparationScale = .4f; 
+	private const float ylog = 1.3f; 
 
 	public fruitWithLocation(GameObject gameObj, float y, float order){
 		o = gameObj;
 		//subtraction bc of how we set up the staff in world space
 		ypos = y + (order * yseparationScale);
-		xpos = xoffset + (order * xseparationScale);
+		xpos = xoffset + ((order * ylog) * xseparationScale);
 		pos = new Vector3(xpos, ypos, 0f);
 	}
 
@@ -37,7 +38,7 @@ public class fruitWithLocation{
 public class addFruitToStaff : MonoBehaviour {
 
 	//all notes will be relative to the lowest (visually, not in world space) note on the staff
-	public float lowestNoteYPos = 6.2f;
+	public float lowestNoteYPos = 8.0f;
 	public GameObject apple;
 	public GameObject banana;
 	public GameObject cherry;
