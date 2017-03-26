@@ -8,7 +8,7 @@ public class RhythmicSequence
     private List<char> seq;
     private List<float> durations;
     private float time_in, total_length;
-    private int current_index, num_correct, num_wrong;
+    private int current_index, total_notes, num_correct, num_wrong;
     private float[] durations_arr;
     public const float MARGIN_OF_ERROR = 0.1f;
 
@@ -101,24 +101,19 @@ public class RhythmicSequence
             switch (c)
             {
                 case 's':
-                    tracking += beat_len / 4.0f;
-                    durations.Add(tracking);
+                    tracking = add_to_sequence(beat_len, tracking, 0.25f);
                     break;
                 case 'e':
-                    tracking += beat_len / 2.0f;
-                    durations.Add(tracking);
+                    tracking = add_to_sequence(beat_len, tracking, 0.5f);
                     break;
                 case 'q':
-                    tracking += beat_len;
-                    durations.Add(tracking);
+                    tracking = add_to_sequence(beat_len, tracking, 1.0f);
                     break;
                 case 'h':
-                    tracking += beat_len * 2.0f;
-                    durations.Add(tracking);
+                    tracking = add_to_sequence(beat_len, tracking, 2.0f);
                     break;
                 case 'w':
-                    tracking += beat_len * 4.0f;
-                    durations.Add(tracking);
+                    tracking = add_to_sequence(beat_len, tracking, 4.0f);
                     break;
                 default:
                     Debug.Log("Error in switch in init_durations");
@@ -127,6 +122,14 @@ public class RhythmicSequence
         }
         total_length = tracking;
         durations_arr = durations.ToArray();
+    }
+
+    private float add_to_sequence(float beat_len, float tracking, float scaled_len)
+    {
+        tracking += beat_len * scaled_len;
+        durations.Add(tracking);
+        total_notes++;
+        return tracking;
     }
 
     public List<char> get_seq()
@@ -286,6 +289,7 @@ public class Rhythm : MonoBehaviour {
         yield return new WaitForSecondsRealtime(0.4f);
         countdown_notification.text = "";
         yield return new WaitForSecondsRealtime(current_rhythm.get_total_length() - 0.3f);
+        Debug.Log("Done waiting");
         listening = false;
         sr.SendMessage("receive_score", current_rhythm);
     }
