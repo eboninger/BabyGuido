@@ -15,6 +15,7 @@ public class score_rhythm : MonoBehaviour
     public Rhythm rhythm;
     public Text stats_display;
     private LinkedList<RhythmicSequence> sequences;
+    private rhythmFruit rhy_fruit;
 
 
     // Use this for initialization
@@ -22,6 +23,7 @@ public class score_rhythm : MonoBehaviour
     {
         rhythm = GameObject.Find("RhythmManager").GetComponent<Rhythm>();
         notes = new Dictionary<string, Note>();
+        rhy_fruit = GameObject.Find("FruitGenerator").GetComponent<rhythmFruit>();
         sequences = new LinkedList<RhythmicSequence>();
         var sources = this.GetComponentsInParent<AudioSource>();
 
@@ -50,22 +52,32 @@ public class score_rhythm : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            // to calibrate the rhythm
-            if (first_press)
-            {
-                bt.setBeat(true);
-                first_press = false;
-                StartCoroutine(begin_challenge());
-            }
-
-            // play each note corresponding to buttons pressed
-            foreach (char c in Input.inputString)
-            {
-                input_note = notes[c.ToString()];
-                //input_note.sample.Play();
-            }
+            handle_key_press(Input.inputString);
         }
- 
+
+    }
+
+    public void handle_key_press(string in_str)
+    {
+        // to calibrate the rhythm
+        if (first_press)
+        {
+            bt.setBeat(true);
+            first_press = false;
+            StartCoroutine(begin_challenge());
+        }
+
+        if (rhythm.listening || rhythm.playing)
+        {
+            rhy_fruit.handle_key_press(in_str);
+        }
+
+        // play each note corresponding to buttons pressed
+        foreach (char c in in_str)
+        {
+            input_note = notes[c.ToString()];
+            //input_note.sample.Play();
+        }
     }
 
     void receive_score(RhythmicSequence rs)

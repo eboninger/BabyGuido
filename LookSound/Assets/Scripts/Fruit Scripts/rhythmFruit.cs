@@ -32,15 +32,23 @@ public class rhythmFruit : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.anyKeyDown){
-			foreach (char c in Input.inputString){
-				createFruit(c);
-			}
-		}
-		
-	}
+		//if (Input.anyKeyDown)
+        //{
+        //    handle_key_press(Input.inputString);
+        //}
 
-	void createFruit(char c){
+    }
+
+    // simulate a key press with inputString of in_str
+    public void handle_key_press(string in_str)
+    {
+        foreach (char c in in_str)
+        {
+            createFruit(c);
+        }
+    }
+
+    void createFruit(char c){
 		GameObject newObj;
 		try {
 			newObj = Instantiate(fruit[c]);

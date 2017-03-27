@@ -144,11 +144,12 @@ public class RhythmicSequence
 }
 
 public class Rhythm : MonoBehaviour {
-    public bool finished_playing, listening;
+    public bool finished_playing, listening, playing;
     public Text countdown_notification, on_rhythm_notification;
     private RhythmicSequence current_rhythm;
-    private score_rhythm sr;
-    private backing_track bt;
+    private score_rhythm score_rhy;
+    private backing_track back_track;
+    private moveBar movbar;
     private float beat, beat_len;
     private bool initialized;
     private Dictionary<char, float> note_divisions;
@@ -156,9 +157,11 @@ public class Rhythm : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         finished_playing = false;
+        playing = false;
         initialized = false;
-        bt = GameObject.Find("Player").GetComponent<backing_track>();
-        sr = GameObject.Find("Player").GetComponent<score_rhythm>();
+        back_track = GameObject.Find("Player").GetComponent<backing_track>();
+        score_rhy = GameObject.Find("Player").GetComponent<score_rhythm>();
+        movbar = GameObject.Find("v line").GetComponent<moveBar>();
 	}
 	
 	// Update is called once per frame
@@ -233,7 +236,7 @@ public class Rhythm : MonoBehaviour {
         // loop until the music has reach an acceptable starting point for the sequence
         while (true)
         {
-            if (bt.onStrongBeat())
+            if (back_track.onStrongBeat())
             {
                 break;
             }
@@ -247,22 +250,35 @@ public class Rhythm : MonoBehaviour {
     private IEnumerator play_from_seq(AudioSource beat_noise, bool listen_to_playback)
     {
         var seq = current_rhythm.get_seq();
+
+        // start the rhythm bar moving
+        movbar.beginMovement();
+        playing = true;
+
         foreach (char single_note in seq)
         {
             var wait_time = note_divisions[single_note];
-            beat_noise.Play();
+            //beat_noise.Play();
+
+            //simulate a key press in both scripts (one to make fruit appear, the other to play the sound)
+            score_rhy.handle_key_press("a");
+
+            // wait for the duration of the note
             yield return new WaitForSecondsRealtime(wait_time);
 
         }
-
+        // stop the movement of the rhtyhm bar
+        movbar.endMovement();
+        playing = false;
         waitForCountdown();
     }
 
+    // wait until we can count the user in to mimic the rhythm
     private void waitForCountdown()
     {
         while (true)
         {
-            if (bt.fourBeatsBefore())
+            if (back_track.fourBeatsBefore())
             {
                 break;
             }
@@ -272,25 +288,38 @@ public class Rhythm : MonoBehaviour {
 
     private IEnumerator countdown()
     {
+        // count down from 4 to 2 with the time between numbers being beat_len
         for(int i = 4; i > 1; i--)
         {
             countdown_notification.text = i.ToString();
             yield return new WaitForSecondsRealtime(beat_len);
         }
 
-        // to count being on beat even before timer is completely done
+        // to begin listening before the timer is completely done
         countdown_notification.text = "1";
         yield return new WaitForSecondsRealtime(beat_len - 0.1f);
         listening = true;
         yield return new WaitForSecondsRealtime(0.1f);
 
+        // start checking against the current rhythmic sequence
         current_rhythm.start_time();
         countdown_notification.text = "GO!";
+
+        // begin rhythm bar movement
+        movbar.beginMovement();
+
+        // wait to remove the "GO!" message
         yield return new WaitForSecondsRealtime(0.4f);
         countdown_notification.text = "";
+
+        // wait for the duration of the rhythmic sequence
         yield return new WaitForSecondsRealtime(current_rhythm.get_total_length() - 0.3f);
-        Debug.Log("Done waiting");
+
+        // end rhythm bar movement
+        movbar.endMovement();
+
+        // stop listenng and send stats to score_rhythm
         listening = false;
-        sr.SendMessage("receive_score", current_rhythm);
+        score_rhy.SendMessage("receive_score", current_rhythm);
     }
 }
