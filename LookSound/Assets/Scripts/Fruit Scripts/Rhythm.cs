@@ -132,6 +132,11 @@ public class RhythmicSequence
         return tracking;
     }
 
+    public int get_total_notes()
+    {
+        return total_notes;
+    }
+
     public List<char> get_seq()
     {
         return seq;
@@ -145,7 +150,7 @@ public class RhythmicSequence
 
 public class Rhythm : MonoBehaviour {
     public bool finished_playing, listening, playing;
-    public Text countdown_notification, on_rhythm_notification;
+    public Text countdown_notification, on_rhythm_notification, score_display;
     private RhythmicSequence current_rhythm;
     private score_rhythm score_rhy;
     private backing_track back_track;
@@ -153,10 +158,12 @@ public class Rhythm : MonoBehaviour {
     private float beat, beat_len;
     private bool initialized;
     private Dictionary<char, float> note_divisions;
+    private int total_score;
 
 	// Use this for initialization
 	void Start () {
         finished_playing = false;
+        total_score = 0;
         playing = false;
         initialized = false;
         back_track = GameObject.Find("Player").GetComponent<backing_track>();
@@ -173,15 +180,29 @@ public class Rhythm : MonoBehaviour {
                 if (current_rhythm.on_beat())
                 {
                     StartCoroutine(notification(on_rhythm_notification, "Good Rhythm!", false, 10));
+                    update_score(5);
                     current_rhythm.inc_num_correct();
                 } else
                 {
                     StartCoroutine(notification(on_rhythm_notification, "Not quite!", false, 0));
+                    update_score(-1);
                     current_rhythm.inc_num_wrong();
                 }
             }
         }
 	}
+
+    private void update_score(int inc)
+    {
+        total_score += inc;
+        
+        if (total_score < 0)
+        {
+            total_score = 0;
+        }
+
+        score_display.text = "Score: " + total_score;
+    }
 
     // if the given notification is not already being displayed (i.e. is_on is false), show it 
     // with the given message and increment the total score by score_increase

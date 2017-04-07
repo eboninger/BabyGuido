@@ -88,7 +88,7 @@ public class score_rhythm : MonoBehaviour
         stats_display.text = ("On the last rhythm, you got\n" + num_correct.ToString() + " notes on the rhythm\n" + 
                                num_wrong.ToString() + " notes off the rhythm\n");
 
-        if (((num_correct * 1.0f) / ((num_correct + num_wrong) * 1.0f)) > .85f)
+        if (((num_correct * 1.0f) / (rs.get_total_notes() * 1.0f)) > .85f)
         {
             sequences.RemoveFirst();
         }
