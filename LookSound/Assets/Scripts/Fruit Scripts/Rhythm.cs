@@ -65,6 +65,12 @@ public class RhythmicSequence
             return true;
         }
 
+        if (current_index >= durations_arr.Length)
+        {
+            current_index = 0;
+            return on_beat();
+        }
+
         float delta = Time.unscaledTime - time_in;
         float current_step = durations_arr[current_index];
 

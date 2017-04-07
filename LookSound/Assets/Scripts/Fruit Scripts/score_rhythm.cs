@@ -44,7 +44,10 @@ public class score_rhythm : MonoBehaviour
         sequences.AddLast(new RhythmicSequence("hhhh"));
         sequences.AddLast(new RhythmicSequence("hhqqq"));
         sequences.AddLast(new RhythmicSequence("wqqqq"));
-        sequences.AddLast(new RhythmicSequence("hqqqee"));
+        sequences.AddLast(new RhythmicSequence("hheeeeq"));
+        sequences.AddLast(new RhythmicSequence("qqeeeehq"));
+        sequences.AddLast(new RhythmicSequence("eeeeeeeeqqeeq"));
+       // sequences.AddLast(new RhythmicSequence(""))
     }
 
     // Update is called once per frame
