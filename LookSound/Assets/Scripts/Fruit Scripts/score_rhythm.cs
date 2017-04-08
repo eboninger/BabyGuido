@@ -79,7 +79,7 @@ public class score_rhythm : MonoBehaviour
         foreach (char c in in_str)
         {
             input_note = notes[c.ToString()];
-            input_note.sample.Play();
+            //input_note.sample.Play();
         }
     }
 
@@ -87,11 +87,12 @@ public class score_rhythm : MonoBehaviour
     {
         var num_correct = rs.get_num_correct();
         var num_wrong = rs.get_num_wrong();
+        var total_notes = rs.get_total_notes();
 
         stats_display.text = ("On the last rhythm, you got\n" + num_correct.ToString() + " notes on the rhythm\n" + 
                                num_wrong.ToString() + " notes off the rhythm\n");
 
-        if (((num_correct * 1.0f) / (rs.get_total_notes() * 1.0f)) > .85f)
+        if (((num_correct * 1.0f) / (total_notes * 1.0f)) > .85f)
         {
             sequences.RemoveFirst();
         }

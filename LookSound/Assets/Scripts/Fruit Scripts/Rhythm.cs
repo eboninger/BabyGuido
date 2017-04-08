@@ -29,6 +29,7 @@ public class RhythmicSequence
         current_index = 0;
         num_correct = 0;
         num_wrong = 0;
+        total_notes = 0;
     }
 
     public int get_num_correct()
@@ -340,7 +341,7 @@ public class Rhythm : MonoBehaviour {
         countdown_notification.text = "";
 
         // wait for the duration of the rhythmic sequence
-        yield return new WaitForSecondsRealtime(current_rhythm.get_total_length() - 0.3f);
+        yield return new WaitForSeconds(current_rhythm.get_total_length() - 0.3f);
 
         // end rhythm bar movement
         movbar.endMovement();
