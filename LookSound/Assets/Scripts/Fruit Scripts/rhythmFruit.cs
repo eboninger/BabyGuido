@@ -31,13 +31,6 @@ public class rhythmFruit : MonoBehaviour {
 		fruit.Add('k', dragonfruit);
 	}
 	
-	void Update () {
-		//if (Input.anyKeyDown)
-        //{
-        //    handle_key_press(Input.inputString);
-        //}
-
-    }
 
     // simulate a key press with inputString of in_str
     public void handle_key_press(string in_str)
