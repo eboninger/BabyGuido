@@ -313,7 +313,6 @@ public class Rhythm : MonoBehaviour {
     // wait until we can count the user in to mimic the rhythm
 	private IEnumerator waitForCountdown()
     {
-		int i = 0;
 		while (true)
         {
             if (back_track.fourBeatsBefore())
