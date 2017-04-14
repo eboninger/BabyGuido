@@ -77,16 +77,16 @@ public class score_rhythm : MonoBehaviour
             return;
         }
 
-        if (rhythm.listening || rhythm.playing)
+        if (rhythm.listening)
         {
             rhy_fruit.handle_key_press(in_str);
-        }
 
-        // play each note corresponding to buttons pressed
-        foreach (char c in in_str)
-        {
-            input_note = notes[c.ToString()];
-            input_note.sample.Play();
+            // play each note corresponding to buttons pressed
+            foreach (char c in in_str)
+            {
+                input_note = notes[c.ToString()];
+                input_note.sample.Play();
+            }
         }
     }
 
