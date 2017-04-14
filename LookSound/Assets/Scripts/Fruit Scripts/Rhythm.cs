@@ -166,6 +166,8 @@ public class Rhythm : MonoBehaviour {
     private bool initialized;
     private Dictionary<char, float> note_divisions;
     private int total_score;
+	public RectTransform star;
+	public Transform flash;
 
 	// Use this for initialization
 	void Start () {
@@ -176,6 +178,8 @@ public class Rhythm : MonoBehaviour {
         back_track = GameObject.Find("Player").GetComponent<backing_track>();
         score_rhy = GameObject.Find("Player").GetComponent<score_rhythm>();
         movbar = GameObject.Find("v line").GetComponent<moveBar>();
+		star = GameObject.Find("star").GetComponent<RectTransform>();
+		flash = GameObject.Find("Flash").GetComponent<Transform>();
 	}
 	
 	// Update is called once per frame
@@ -186,7 +190,7 @@ public class Rhythm : MonoBehaviour {
             {
                 if (current_rhythm.on_beat())
                 {
-                    StartCoroutine(notification(on_rhythm_notification, "Good Rhythm!", false, 10));
+                    StartCoroutine(notification(on_rhythm_notification, "Good!", false, 10));
                     update_score(5);
                     current_rhythm.inc_num_correct();
                 } else
@@ -220,9 +224,13 @@ public class Rhythm : MonoBehaviour {
             notif.text = message;
             notif.enabled = true;
             //is_on = true;
-            yield return new WaitForSeconds(0.2f);
+			if(score_increase != 0){
+				star.localScale = new Vector3(1.5f, 1.5f, 1f);
+			}
+            yield return new WaitForSeconds(0.4f);
             //is_on = false;
             notif.enabled = false;
+			star.localScale = Vector3.zero;
         }
     }
 
@@ -297,21 +305,25 @@ public class Rhythm : MonoBehaviour {
         // stop the movement of the rhtyhm bar
         movbar.endMovement();
         playing = false;
-        waitForCountdown();
-        yield break;
+
+		StartCoroutine(waitForCountdown());
+
     }
 
     // wait until we can count the user in to mimic the rhythm
-    private void waitForCountdown()
+	private IEnumerator waitForCountdown()
     {
-        while (true)
+		int i = 0;
+		while (true)
         {
             if (back_track.fourBeatsBefore())
             {
                 break;
             }
+
         }
-        StartCoroutine(countdown());
+		yield return StartCoroutine(countdown());
+        
     }
 
     private IEnumerator countdown()
@@ -331,14 +343,19 @@ public class Rhythm : MonoBehaviour {
 
         // start checking against the current rhythmic sequence
         current_rhythm.start_time();
-        countdown_notification.text = "GO!";
+		flash.localScale = new Vector3(2f, 2f, 1f);
+
+        //countdown_notification.text = "GO!";
+
 
         // begin rhythm bar movement
         movbar.beginMovement();
 
         // wait to remove the "GO!" message
-        yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForSecondsRealtime(0.5f);
         countdown_notification.text = "";
+		flash.localScale = Vector3.zero;
+
 
         // wait for the duration of the rhythmic sequence
         yield return new WaitForSeconds(current_rhythm.get_total_length() - 0.3f);

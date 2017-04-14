@@ -6,7 +6,7 @@ public class moveBar : MonoBehaviour {
 
 	private Vector3 startPos;
     private bool moving = false;
-	public float moveRate = 1.2f;
+	private float moveRate = 3.5f;
 	public float rightScreenEdge = 8.1f;
 
 	void Start () {
