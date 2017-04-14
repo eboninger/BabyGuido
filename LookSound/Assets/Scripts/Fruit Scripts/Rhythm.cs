@@ -296,7 +296,7 @@ public class Rhythm : MonoBehaviour {
             //beat_noise.Play();
 
             //simulate a key press in both scripts (one to make fruit appear, the other to play the sound)
-            score_rhy.handle_key_press("a");
+            score_rhy.handle_key_press("playback");
 
             // wait for the duration of the note
             yield return new WaitForSecondsRealtime(wait_time);

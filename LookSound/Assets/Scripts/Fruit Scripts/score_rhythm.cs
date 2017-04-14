@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class score_rhythm : MonoBehaviour
 {
-
+    public AudioSource playback_sound;
     public backing_track bt;
     public Dictionary<string, Note> notes;
     int user_score = 0;
@@ -68,6 +68,13 @@ public class score_rhythm : MonoBehaviour
             bt.setBeat(true);
             first_press = false;
             StartCoroutine(begin_challenge());
+        }
+
+        if (in_str=="playback")
+        {
+            playback_sound.Play();
+            rhy_fruit.handle_key_press("a");
+            return;
         }
 
         if (rhythm.listening || rhythm.playing)
