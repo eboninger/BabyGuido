@@ -270,7 +270,6 @@ public class Rhythm : MonoBehaviour {
             }
         }
         StartCoroutine(play_from_seq(beat_noise, listen_to_playback));
-
     }
 
 
@@ -299,6 +298,7 @@ public class Rhythm : MonoBehaviour {
         movbar.endMovement();
         playing = false;
         waitForCountdown();
+        yield break;
     }
 
     // wait until we can count the user in to mimic the rhythm
