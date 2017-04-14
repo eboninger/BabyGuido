@@ -10,7 +10,7 @@ public class RhythmicSequence
     private float time_in, total_length;
     private int current_index, total_notes, num_correct, num_wrong;
     private float[] durations_arr;
-    public const float MARGIN_OF_ERROR = 0.1f;
+    public const float MARGIN_OF_ERROR = 0.15f;
 
     public RhythmicSequence(string s)
     {

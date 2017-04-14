@@ -73,7 +73,7 @@ public class score_rhythm : MonoBehaviour
         if (in_str=="playback")
         {
             playback_sound.Play();
-            rhy_fruit.handle_key_press("a");
+            rhy_fruit.handle_key_press("a");    
             return;
         }
 
@@ -86,7 +86,7 @@ public class score_rhythm : MonoBehaviour
         foreach (char c in in_str)
         {
             input_note = notes[c.ToString()];
-            //input_note.sample.Play();
+            input_note.sample.Play();
         }
     }
 
