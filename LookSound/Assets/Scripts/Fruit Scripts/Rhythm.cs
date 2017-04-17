@@ -168,7 +168,6 @@ public class Rhythm : MonoBehaviour {
     private int total_score;
 	public RectTransform star;
 	public Transform flash;
-
 	// Use this for initialization
 	void Start () {
         finished_playing = false;
@@ -180,27 +179,28 @@ public class Rhythm : MonoBehaviour {
         movbar = GameObject.Find("v line").GetComponent<moveBar>();
 		star = GameObject.Find("star").GetComponent<RectTransform>();
 		flash = GameObject.Find("Flash").GetComponent<Transform>();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.anyKeyDown)
         {
-            if (listening)
-            {
-                if (current_rhythm.on_beat())
-                {
-                    StartCoroutine(notification(on_rhythm_notification, "Good!", false, 10));
-                    update_score(5);
-                    current_rhythm.inc_num_correct();
-                } else
-                {
-                    StartCoroutine(notification(on_rhythm_notification, "Not quite!", false, 0));
-                    update_score(-1);
-                    current_rhythm.inc_num_wrong();
-                }
-            }
-        }
+			if (listening)
+			{
+				if (current_rhythm.on_beat())
+				{
+					StartCoroutine(notification(on_rhythm_notification, "Good!", false, 10));
+					update_score(5);
+					current_rhythm.inc_num_correct();
+				} else
+				{
+					StartCoroutine(notification(on_rhythm_notification, "Not quite!", false, 0));
+					update_score(-1);
+					current_rhythm.inc_num_wrong();
+				}
+			}
+    	}
 	}
 
     private void update_score(int inc)

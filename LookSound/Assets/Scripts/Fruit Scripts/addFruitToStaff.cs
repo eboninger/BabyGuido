@@ -11,18 +11,16 @@ public class fruitWithLocation{
 	private float ypos;
 	private float xpos;
 	//offset from the begining of the music staff
-	private const float xoffset = 3.0f; 
+	public float xoffset = 3.0f; 
 	//scales how close or far the fruits are on the x axis
-	private const float xseparationScale = 2.70f; 
+	public float xseparationScale = 3.00f; 
 	//scales distance between half steps on the scale
-	private const float yseparationScale = .4f; 
-	private const float ylog = 1.3f; 
+	public float yseparationScale = .65f; 
 
 	public fruitWithLocation(GameObject gameObj, float y, float order){
 		o = gameObj;
-		//subtraction bc of how we set up the staff in world space
-		ypos = y + (order * yseparationScale);
-		xpos = xoffset + ((order * ylog) * xseparationScale);
+		ypos = y + (order  * yseparationScale);
+		xpos = xoffset + (order * xseparationScale);
 		pos = new Vector3(xpos, ypos, 0f);
 	}
 
