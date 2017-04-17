@@ -4,7 +4,7 @@ using System.Collections;
 public class fadeFruit : MonoBehaviour {
 	float minimum = 0.0f;
 	float maximum = 1f;
-	float duration = 4.0f;
+	float duration = 3.0f;
 	bool fade = false;
 	float startTime;
 	float t;

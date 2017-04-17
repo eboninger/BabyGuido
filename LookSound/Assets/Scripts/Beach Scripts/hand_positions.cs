@@ -141,7 +141,7 @@ public class hand_positions : MonoBehaviour {
                     toEditMode();
                 }
             }
-            if (Input.GetKeyDown("p"))
+			if (Input.GetKeyDown(KeyCode.Return))
             {
                 pf.play();
             }
