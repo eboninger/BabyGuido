@@ -128,6 +128,10 @@
     <Compile Include="Assets\Scripts\Fruit Scripts\rhythmFruit.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\score.cs" />
     <Compile Include="Assets\Scripts\Fruit Scripts\score_rhythm.cs" />
+    <Compile Include="Assets\Scripts\SceenLoader.cs" />
+    <Compile Include="Assets\Scripts\moveHand.cs" />
+    <Compile Include="Assets\Scripts\pauseGame.cs" />
+    <Compile Include="Assets\Scripts\returnToMainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Example Games\2D Scrolling Shooter\Fonts\PressStart2P-Regular\OFL.txt" />

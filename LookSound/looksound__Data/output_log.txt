@@ -1,0 +1,42 @@
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 4000 (ID=0x166)
+    Vendor:   Intel
+    VRAM:     848 MB
+    Driver:   9.17.10.2932
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.085 seconds
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\eboninger\Documents\Code\BabyGuido\LookSound\looksound__Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 40Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.261909 ms
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.738072 ms
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 469.
+Total: 10.688209 ms (FindLiveObjects: 0.052249 ms CreateObjectMapping: 0.043385 ms MarkObjects: 0.385803 ms  DeleteObjects: 10.190443 ms)
+
+0.1493197
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 5780 -> priority: 1 
+  Thread -> id: 6d34 -> priority: 1 
