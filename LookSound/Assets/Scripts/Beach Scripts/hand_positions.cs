@@ -108,28 +108,28 @@ public class hand_positions : MonoBehaviour {
 	void Update () {
         if (!pf.playing)
         {
-            if (Input.GetKeyDown("right"))
+			if (Input.GetKeyDown(KeyCode.S))
             {
                 if (inPlay)
                     pf.moveRight();
                 else
                     updateHandAndMouse(1);
             }
-            if (Input.GetKeyDown("left"))
+			if (Input.GetKeyDown(KeyCode.A))
             {
                 if (inPlay)
                     pf.moveLeft();
                 else
                     updateHandAndMouse(-1);
             }
-            if (Input.GetKeyDown("space"))
+			if (Input.GetKeyDown(KeyCode.G))
             {
                 if (inPlay)
                     pf.space();
                 else
                     pf.addToPlayPanel();
             }
-            if ((Input.GetKeyDown("down") || Input.GetKeyDown("up")) && (pf.total_play_objects > 0))
+			if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.D)) && (pf.total_play_objects > 0))
             {
                 inPlay = !inPlay;
                 if (inPlay)
@@ -145,11 +145,7 @@ public class hand_positions : MonoBehaviour {
             {
                 pf.play();
             }
-        }        
-        if (Input.GetKeyDown("escape"))
-        {
-            Application.Quit();
-        }
+        }  
 	}
 
     public void toPlayMode()

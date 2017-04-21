@@ -9,6 +9,9 @@ public class returnToMainMenu : MonoBehaviour {
 		if(Input.GetKey(KeyCode.B)){
 			Application.LoadLevel(0);
 		}
+		if(Input.GetKey(KeyCode.Escape)){
+			Application.Quit();
+		}
 		
 	}
 }

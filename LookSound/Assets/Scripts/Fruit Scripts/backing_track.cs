@@ -32,6 +32,10 @@ public class backing_track : MonoBehaviour {
     public void setBeat(bool on_rhythm)
     {
         BEAT = (bt.timeSamples * sampling_rate) % BEAT_MOD;
+		//if (on_rhythm)
+		//	BEAT = 0.0f;
+		//else
+		//	BEAT = .483f;
         MEASURE = (bt.timeSamples * sampling_rate) % MEASURE_MOD;
         MEASURE_LO = MEASURE - 0.05f;
         MEASURE_HI = MEASURE + 0.05f;

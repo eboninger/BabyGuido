@@ -41,6 +41,8 @@ public class score : MonoBehaviour {
         notes.Add("h", new Note(sources[6], 5));
         notes.Add("j", new Note(sources[7], 6));
         notes.Add("k", new Note(sources[8], 7));
+		notes.Add("l", new Note(sources[9], 8));
+		notes.Add(";", new Note(sources[10], 9));
     }
 	
 	// Update is called once per frame

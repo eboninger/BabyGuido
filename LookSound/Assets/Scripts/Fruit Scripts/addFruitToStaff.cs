@@ -13,7 +13,7 @@ public class fruitWithLocation{
 	//offset from the begining of the music staff
 	public float xoffset = 3.0f; 
 	//scales how close or far the fruits are on the x axis
-	public float xseparationScale = 3.00f; 
+	public float xseparationScale = 2.50f; 
 	//scales distance between half steps on the scale
 	public float yseparationScale = .65f; 
 
@@ -55,7 +55,9 @@ public class addFruitToStaff : MonoBehaviour {
 		fruitWithLocation a = new fruitWithLocation(apple, lowestNoteYPos, 4);
 		fruitWithLocation b = new fruitWithLocation(banana, lowestNoteYPos, 5);
 		fruitWithLocation c = new fruitWithLocation(cherry, lowestNoteYPos, 6);
-		fruitWithLocation highd = new fruitWithLocation(dragonfruit, lowestNoteYPos, 7);
+		fruitWithLocation highd = new fruitWithLocation(dragonfruit, lowestNoteYPos, 7.5f);
+		fruitWithLocation highe = new fruitWithLocation(eggplant, lowestNoteYPos, 8.5f);
+		fruitWithLocation highf = new fruitWithLocation(fig, lowestNoteYPos, 9.5f);
 		fruit.Add('a', lowd);
 		fruit.Add('s', e);
 		fruit.Add('d', f);
@@ -64,6 +66,8 @@ public class addFruitToStaff : MonoBehaviour {
 		fruit.Add('h', b);
 		fruit.Add('j', c);
 		fruit.Add('k', highd);
+		fruit.Add('l', highe);
+		fruit.Add(';', highf);
 	
 	}
 	

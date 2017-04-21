@@ -25,22 +25,22 @@ public class moveHand : MonoBehaviour {
 		posArray[1] = middleButtonPos;
 		posArray[2] = bottomButtonPos;
 		currentPosition = 0;
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.W)){
+		if(Input.GetKeyDown(KeyCode.S)){
 			//move the hand up to the next button
 			moveUp();
 			handPos.localPosition = posArray[currentPosition];
 			
-		} else if(Input.GetKeyDown(KeyCode.S)){
+		} else if(Input.GetKeyDown(KeyCode.A)){
 			//move the hand down to the next button
 			moveDown();
 			handPos.localPosition = posArray[currentPosition];
 
-		} else if(Input.GetKeyDown(KeyCode.A)){
+		} else if(Input.GetKeyDown(KeyCode.Return)){
 			//load the level the hand is pointing to
 			Application.LoadLevel(currentPosition + 1);
 			
